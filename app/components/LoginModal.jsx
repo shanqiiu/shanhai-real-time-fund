@@ -112,10 +112,17 @@ export default function LoginModal({onClose,
     try {
       if (isExplicitLoginRef) isExplicitLoginRef.current = true;
       setLoginLoading(true);
+      const redirectUrl = new URL(window.location.href);
+      // GitHub Pages 项目页需要保留子路径，避免回跳到根域名导致 404。
+      redirectUrl.search = '';
+      redirectUrl.hash = '';
+      if (!redirectUrl.pathname.endsWith('/')) {
+        redirectUrl.pathname = `${redirectUrl.pathname}/`;
+      }
       const { error } = await supabase.auth.signInWithOAuth({
         provider: 'github',
         options: {
-          redirectTo: window.location.origin
+          redirectTo: redirectUrl.toString()
         }
       });
       if (error) throw error;
