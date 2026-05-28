@@ -5,8 +5,8 @@ const nextConfig = {
   output: 'export',
   
   // 🔥 关键修复：适配 GitHub Pages 子路径部署
-  basePath: '/shanhai-real-time-fund',
-  assetPrefix: '/shanhai-real-time-fund/',
+  basePath: '/real-time-fund',
+  assetPrefix: '/real-time-fund/',
   
   images: {
     unoptimized: true
